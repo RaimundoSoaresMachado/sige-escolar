@@ -5,253 +5,349 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SIGE – Sistema Integrado de Gestão Escolar</title>
   <meta name="description" content="Plataforma completa para gestão educacional municipal. Frequência digital, notas, alunos, documentos e muito mais." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; }
+    body { font-family: 'Inter', 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; }
     a { text-decoration: none; }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      background: #1e3a5f;
-      padding: 16px 40px;
+      background: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(12px);
+      padding: 14px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
-    .nav-logo { color: #fff; font-size: 22px; font-weight: 700; letter-spacing: 1px; }
-    .nav-logo span { color: #f59e0b; }
+    .nav-logo { color: #fff; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; display:flex;align-items:center;gap:10px; }
+    .nav-logo-icon { width:36px;height:36px;background:linear-gradient(135deg,#2563eb,#1d4ed8);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px; }
+    .nav-logo span.accent { color: #f59e0b; }
+    .nav-links { display:flex;gap:28px;align-items:center; }
+    .nav-links a { color:rgba(255,255,255,0.65);font-size:14px;font-weight:500;transition:color .2s; }
+    .nav-links a:hover { color:#fff; }
     .nav-btn {
-      background: #f59e0b;
-      color: #1e3a5f;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: background 0.2s;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #0f172a;
+      padding: 10px 22px; border-radius: 8px;
+      font-weight: 700; font-size: 14px;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 14px rgba(245,158,11,.35);
     }
-    .nav-btn:hover { background: #d97706; }
+    .nav-btn:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(245,158,11,.45); }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1e40af 100%);
       color: #fff;
-      padding: 80px 40px;
+      padding: 90px 48px 0;
       text-align: center;
+      overflow: hidden;
+      position: relative;
     }
+    .hero::before {
+      content:'';
+      position:absolute;inset:0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(59,130,246,.18) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(245,158,11,.08) 0%, transparent 50%);
+    }
+    .hero-inner { position:relative;z-index:1; }
     .hero-badge {
-      display: inline-block;
-      background: rgba(245,158,11,0.2);
-      color: #f59e0b;
-      border: 1px solid #f59e0b;
-      padding: 6px 18px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 24px;
+      display: inline-flex; align-items:center; gap:8px;
+      background: rgba(245,158,11,0.15); color: #fbbf24;
+      border: 1px solid rgba(245,158,11,0.35);
+      padding: 7px 20px; border-radius: 999px;
+      font-size: 13px; font-weight: 600; margin-bottom: 28px;
     }
-    .hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+    .hero h1 {
+      font-size: clamp(32px, 5.5vw, 60px);
+      font-weight: 900; margin-bottom: 22px;
+      line-height: 1.1; letter-spacing: -1.5px;
+    }
     .hero h1 span { color: #f59e0b; }
-    .hero p { font-size: 18px; opacity: 0.85; max-width: 680px; margin: 0 auto 40px; }
-    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero p {
+      font-size: clamp(16px, 2vw, 19px);
+      opacity: 0.8; max-width: 650px;
+      margin: 0 auto 40px; line-height: 1.7; font-weight:400;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
     .btn-primary {
-      background: #f59e0b; color: #1e3a5f;
-      padding: 14px 32px; border-radius: 8px;
-      font-weight: 700; font-size: 16px;
-      transition: background 0.2s;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #0f172a; padding: 15px 34px; border-radius: 10px;
+      font-weight: 700; font-size: 15px;
+      box-shadow: 0 4px 20px rgba(245,158,11,.4);
+      transition: transform .15s;
     }
-    .btn-primary:hover { background: #d97706; }
+    .btn-primary:hover { transform:translateY(-2px); }
     .btn-outline {
-      border: 2px solid rgba(255,255,255,0.5);
-      color: #fff;
-      padding: 14px 32px; border-radius: 8px;
-      font-weight: 600; font-size: 16px;
-      transition: border-color 0.2s;
+      border: 2px solid rgba(255,255,255,0.3); color: #fff;
+      padding: 15px 34px; border-radius: 10px;
+      font-weight: 600; font-size: 15px; backdrop-filter:blur(4px);
+      background:rgba(255,255,255,0.07);
+      transition: background .2s, border-color .2s;
     }
-    .btn-outline:hover { border-color: #fff; }
+    .btn-outline:hover { background:rgba(255,255,255,0.13); border-color:rgba(255,255,255,.6); }
 
-    /* STATS */
+    /* ── HERO SCREENSHOTS ── */
+    .hero-screens {
+      position: relative;
+      max-width: 1050px;
+      margin: 0 auto;
+      height: 420px;
+    }
+    .hero-screens .screen-main {
+      position: absolute;
+      left: 50%; top: 0;
+      transform: translateX(-50%);
+      width: 72%;
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -4px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08);
+      overflow: hidden;
+      z-index: 3;
+    }
+    .hero-screens .screen-left {
+      position: absolute;
+      left: 0; top: 48px;
+      width: 32%;
+      border-radius: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.4);
+      overflow: hidden; z-index: 2;
+      opacity: 0.85;
+    }
+    .hero-screens .screen-right {
+      position: absolute;
+      right: 0; top: 48px;
+      width: 32%;
+      border-radius: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.4);
+      overflow: hidden; z-index: 2;
+      opacity: 0.85;
+    }
+    .hero-screens img { width: 100%; display: block; }
+
+    /* ── STATS ── */
     .stats {
-      background: #fff;
-      padding: 48px 40px;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
+      background: #fff; padding: 44px 48px;
+      display: flex; justify-content: center; gap: 0;
       border-bottom: 1px solid #e2e8f0;
     }
-    .stat { text-align: center; }
-    .stat-number { font-size: 36px; font-weight: 800; color: #1e40af; }
-    .stat-label { font-size: 14px; color: #64748b; margin-top: 4px; }
-
-    /* SECTION */
-    section { padding: 72px 40px; max-width: 1100px; margin: 0 auto; }
-    .section-title { font-size: 30px; font-weight: 700; text-align: center; margin-bottom: 12px; }
-    .section-sub { text-align: center; color: #64748b; font-size: 16px; margin-bottom: 48px; }
-
-    /* FEATURES GRID */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+    .stat {
+      text-align: center; padding: 0 40px;
+      border-right: 1px solid #e2e8f0;
     }
+    .stat:last-child { border-right: none; }
+    .stat-number { font-size: 38px; font-weight: 900; color: #1e40af; letter-spacing:-1px; }
+    .stat-label { font-size: 13px; color: #64748b; margin-top: 4px; font-weight:500; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 48px; max-width: 1140px; margin: 0 auto; }
+    .section-eyebrow { display:inline-block;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#2563eb;background:#eff6ff;padding:5px 14px;border-radius:999px;margin-bottom:16px; }
+    .section-title { font-size: clamp(26px,4vw,36px); font-weight: 800; margin-bottom: 14px; letter-spacing:-0.5px; }
+    .section-sub { color: #64748b; font-size: 16px; margin-bottom: 52px; max-width:560px; line-height:1.6; }
+    .centered { text-align:center; }
+    .centered .section-sub { margin-left:auto;margin-right:auto; }
+
+    /* ── FEATURES GRID ── */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
     .feature-card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 28px;
-      transition: box-shadow 0.2s, transform 0.2s;
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px 26px;
+      transition: box-shadow .2s, transform .2s; cursor:default;
     }
-    .feature-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
-    .feature-icon {
-      width: 48px; height: 48px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-      margin-bottom: 16px;
-    }
-    .feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-    .feature-card p { font-size: 14px; color: #64748b; line-height: 1.6; }
+    .feature-card:hover { box-shadow: 0 8px 30px rgba(30,64,175,.1); transform:translateY(-3px); }
+    .feature-card.featured { border: 2px solid #2563eb; background: linear-gradient(135deg, #f0f7ff, #fff); }
+    .feature-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; color:#0f172a; }
+    .feature-card p { font-size: 14px; color: #64748b; line-height: 1.65; }
+    .feature-card ul { margin-top:10px;padding-left:16px;color:#64748b;font-size:13px;line-height:2.1; }
+    .badge-new { font-size:10px;background:#2563eb;color:#fff;border-radius:999px;padding:2px 9px;margin-left:8px;font-weight:700;vertical-align:middle; }
 
-    /* ROLES */
-    .roles-bg { background: #f1f5f9; }
-    .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+    /* ── SPLIT SECTIONS ── */
+    .split-wrap { padding: 0; }
+    .split-section { display: flex; align-items: center; gap: 64px; padding: 80px 48px; max-width: 1140px; margin: 0 auto; }
+    .split-section.reverse { flex-direction: row-reverse; }
+    .split-text { flex: 1; }
+    .split-text h2 { font-size: clamp(22px,3vw,30px); font-weight: 800; margin-bottom: 16px; color: #0f172a; letter-spacing:-0.3px; }
+    .split-text p { font-size: 15px; color: #64748b; line-height: 1.75; margin-bottom: 14px; }
+    .split-text ul { padding-left: 0; color: #475569; font-size: 15px; list-style:none; }
+    .split-text ul li { padding: 5px 0; display:flex;align-items:center;gap:10px; }
+    .split-text ul li::before { content:'✓';color:#16a34a;font-weight:700;flex-shrink:0; }
+    .split-img { flex: 1; }
+    .split-img img {
+      width: 100%; border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.14);
+      display:block;
     }
+    .img-caption { text-align:center;font-size:12px;color:#94a3b8;margin-top:10px; }
+
+    /* ── ROLES ── */
+    .roles-bg { background: linear-gradient(180deg,#f8fafc,#f1f5f9); }
+    .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
     .role-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      border: 1px solid #e2e8f0;
+      background: #fff; border-radius: 14px; padding: 28px 20px;
+      text-align: center; border: 1px solid #e2e8f0;
+      transition: box-shadow .2s, transform .2s;
     }
-    .role-emoji { font-size: 36px; margin-bottom: 12px; }
-    .role-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-    .role-card p { font-size: 13px; color: #64748b; line-height: 1.5; }
+    .role-card:hover { box-shadow:0 8px 24px rgba(0,0,0,.08); transform:translateY(-2px); }
+    .role-emoji { font-size: 36px; margin-bottom: 14px; display:block; }
+    .role-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color:#0f172a; }
+    .role-card p { font-size: 13px; color: #64748b; line-height: 1.6; }
 
-    /* DIFFERENTIALS */
-    .diff-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
+    /* ── DIFF ── */
+    .diff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
     .diff-card {
       background: linear-gradient(135deg, #1e3a5f, #1e40af);
-      color: #fff;
-      border-radius: 12px;
-      padding: 28px 20px;
-      text-align: center;
+      color: #fff; border-radius: 14px; padding: 28px 22px; text-align: center;
+      transition: transform .2s;
     }
-    .diff-icon { font-size: 32px; margin-bottom: 12px; }
+    .diff-card:hover { transform:translateY(-3px); }
+    .diff-icon { font-size: 32px; margin-bottom: 14px; display:block; }
     .diff-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-    .diff-card p { font-size: 13px; opacity: 0.8; line-height: 1.5; }
+    .diff-card p { font-size: 13px; opacity: 0.78; line-height: 1.6; }
 
-    /* FAQ */
-    .faq-list { max-width: 700px; margin: 0 auto; }
+    /* ── TESTIMONIAL / HIGHLIGHT ── */
+    .highlight-bar {
+      background: linear-gradient(135deg, #1e40af, #1e3a5f);
+      padding: 52px 48px; text-align:center; color:#fff;
+    }
+    .highlight-bar blockquote { font-size:clamp(18px,3vw,24px);font-weight:700;max-width:800px;margin:0 auto 20px;line-height:1.5;opacity:.95; }
+    .highlight-bar cite { font-size:14px;opacity:.65; }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 720px; margin: 0 auto; }
     .faq-item {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin-bottom: 12px;
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 22px 26px; margin-bottom: 12px;
+      transition: box-shadow .2s;
     }
-    .faq-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: #1e3a5f; }
-    .faq-item p { font-size: 14px; color: #64748b; line-height: 1.6; }
+    .faq-item:hover { box-shadow:0 4px 16px rgba(0,0,0,.07); }
+    .faq-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #1e3a5f; }
+    .faq-item p { font-size: 14px; color: #64748b; line-height: 1.7; }
 
-    /* CTA */
+    /* ── CTA ── */
     .cta-section {
-      background: linear-gradient(135deg, #1e3a5f, #1e40af);
-      color: #fff;
-      text-align: center;
-      padding: 80px 40px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1e40af 100%);
+      color: #fff; text-align: center; padding: 90px 48px;
+      position:relative; overflow:hidden;
     }
-    .cta-section h2 { font-size: 32px; font-weight: 800; margin-bottom: 16px; }
-    .cta-section p { font-size: 18px; opacity: 0.85; margin-bottom: 40px; }
-    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-section::before {
+      content:'';position:absolute;inset:0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,.25), transparent 60%);
+    }
+    .cta-section h2 { font-size: clamp(28px,4vw,42px); font-weight: 900; margin-bottom: 18px; letter-spacing:-1px; position:relative; }
+    .cta-section p { font-size: 18px; opacity: 0.8; margin-bottom: 44px; position:relative; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position:relative; }
     .btn-whatsapp {
-      background: #25d366;
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 16px;
-      transition: background 0.2s;
+      background: linear-gradient(135deg,#22c55e,#16a34a);
+      color: #fff; padding: 15px 34px; border-radius: 10px;
+      font-weight: 700; font-size: 16px;
+      box-shadow: 0 4px 20px rgba(34,197,94,.4);
+      transition: transform .15s;
     }
-    .btn-whatsapp:hover { background: #1ebe5d; }
+    .btn-whatsapp:hover { transform:translateY(-2px); }
     .btn-email {
-      border: 2px solid rgba(255,255,255,0.5);
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 16px;
+      border: 2px solid rgba(255,255,255,0.35); color: #fff;
+      padding: 15px 34px; border-radius: 10px;
+      font-weight: 600; font-size: 16px;
+      background:rgba(255,255,255,.08);
+      transition: background .2s;
     }
-    .btn-email:hover { border-color: #fff; }
+    .btn-email:hover { background:rgba(255,255,255,.16); }
 
-    /* FOOTER */
-    footer {
-      background: #0f172a;
-      color: #94a3b8;
-      padding: 40px;
-      text-align: center;
-      font-size: 14px;
-    }
-    footer .footer-logo { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    /* ── FOOTER ── */
+    footer { background: #0f172a; color: #64748b; padding: 44px 48px; text-align: center; font-size: 14px; }
+    footer .footer-logo { color: #fff; font-size: 20px; font-weight: 800; margin-bottom: 8px; letter-spacing:-0.5px; }
     footer .footer-logo span { color: #f59e0b; }
+    footer p { margin-top:6px; line-height:1.7; }
 
-    @media (max-width: 600px) {
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
       nav { padding: 14px 20px; }
-      .hero { padding: 60px 20px; }
-      section { padding: 48px 20px; }
-      .stats { padding: 32px 20px; gap: 24px; }
+      .nav-links { display:none; }
+      .hero { padding: 70px 24px 0; }
+      section, .split-section { padding: 52px 24px; }
+      .stats { padding: 32px 20px; gap: 0; flex-wrap:wrap; }
+      .stat { padding: 16px 24px; border-right:none; border-bottom:1px solid #e2e8f0; width:50%; }
+      .stat:last-child { border-bottom:none; }
+      .split-section { flex-direction: column !important; gap:36px; }
+      .hero-screens { height: 200px; }
+      .hero-screens .screen-left, .hero-screens .screen-right { display:none; }
+      .hero-screens .screen-main { width: 90%; }
+      .cta-section { padding: 60px 24px; }
+      footer { padding: 36px 24px; }
+      .highlight-bar { padding: 40px 24px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
 <nav>
-  <div class="nav-logo">SI<span>GE</span></div>
-  <a href="#contato" class="nav-btn">Solicitar Demo</a>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🎓</div>
+    SI<span class="accent">GE</span>
+  </div>
+  <div class="nav-links">
+    <a href="#funcionalidades">Funcionalidades</a>
+    <a href="#perfis">Perfis</a>
+    <a href="#diferenciais">Diferenciais</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="#contato" class="nav-btn">Solicitar Demo →</a>
 </nav>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
 <div class="hero">
-  <div class="hero-badge">🎓 Sistema Integrado de Gestão Escolar</div>
-  <h1>Gestão Educacional <span>Completa</span> para Municípios</h1>
-  <p>Frequência digital, notas, documentos oficiais, BI e muito mais — tudo integrado numa única plataforma para secretarias municipais de educação.</p>
-  <div class="hero-btns">
-    <a href="#contato" class="btn-primary">Solicitar Demonstração Gratuita</a>
-    <a href="#funcionalidades" class="btn-outline">Ver Funcionalidades</a>
+  <div class="hero-inner">
+    <div class="hero-badge">🎓 Sistema Integrado de Gestão Escolar</div>
+    <h1>Gestão Educacional <span>Completa</span><br>para Municípios</h1>
+    <p>Frequência digital, notas, documentos oficiais, BI e muito mais — tudo integrado numa única plataforma para Secretarias Municipais de Educação.</p>
+    <div class="hero-btns">
+      <a href="#contato" class="btn-primary">📋 Solicitar Demonstração Gratuita</a>
+      <a href="#funcionalidades" class="btn-outline">Ver Funcionalidades</a>
+    </div>
+
+    <!-- Screenshots compostos com imagens reais de educação/tecnologia -->
+    <div class="hero-screens">
+      <div class="screen-left">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&q=80&auto=format&fit=crop"
+             alt="Sistema de gestão" />
+      </div>
+      <div class="screen-main">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=80&auto=format&fit=crop"
+             alt="Dashboard SIGE" />
+      </div>
+      <div class="screen-right">
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&q=80&auto=format&fit=crop"
+             alt="Gestão escolar" />
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- STATS -->
+<!-- ══════════════════════════════════════
+     STATS
+══════════════════════════════════════ -->
 <div class="stats">
-  <div class="stat">
-    <div class="stat-number">100%</div>
-    <div class="stat-label">Digital e na Nuvem</div>
-  </div>
-  <div class="stat">
-    <div class="stat-number">6+</div>
-    <div class="stat-label">Perfis de Acesso</div>
-  </div>
-  <div class="stat">
-    <div class="stat-number">∞</div>
-    <div class="stat-label">Escolas e Alunos</div>
-  </div>
-  <div class="stat">
-    <div class="stat-number">24/7</div>
-    <div class="stat-label">Disponível Online</div>
-  </div>
+  <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Digital e na Nuvem</div></div>
+  <div class="stat"><div class="stat-number">6+</div><div class="stat-label">Perfis de Acesso</div></div>
+  <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Escolas e Alunos</div></div>
+  <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Disponível Online</div></div>
 </div>
 
-<!-- FUNCIONALIDADES -->
-<section id="funcionalidades">
+<!-- ══════════════════════════════════════
+     FUNCIONALIDADES
+══════════════════════════════════════ -->
+<section id="funcionalidades" class="centered">
+  <span class="section-eyebrow">Funcionalidades</span>
   <div class="section-title">Tudo que sua secretaria precisa</div>
   <div class="section-sub">Módulos completos e integrados para toda a rede municipal de ensino</div>
   <div class="features-grid">
@@ -300,132 +396,237 @@
       <h3>Gestão de RH</h3>
       <p>Cadastro de funcionários, vínculos, formações acadêmicas, contratos e declarações de tempo de serviço para toda a rede.</p>
     </div>
+    <div class="feature-card featured" style="border-color:#16a34a;background:linear-gradient(135deg,#f0fdf4,#fff);">
+      <div class="feature-icon" style="background:#dcfce7;">📊</div>
+      <h3>Censo Escolar <span class="badge-new" style="background:#16a34a;">Destaque</span></h3>
+      <p>O processo do Censo Escolar fica <strong>ágil e eficaz</strong> com o SIGE — todos os dados já estão cadastrados no sistema, prontos para exportação e envio ao INEP.</p>
+      <ul>
+        <li>Dados de alunos, turmas e professores sempre atualizados</li>
+        <li>Exportação formatada para o EducaCenso / INEP</li>
+        <li>Validação automática de inconsistências antes do envio</li>
+        <li>Relatórios comparativos ano a ano</li>
+        <li>Zero retrabalho — uma única base de dados</li>
+      </ul>
+    </div>
+    <div class="feature-card featured">
+      <div class="feature-icon" style="background:#dbeafe;">🗂️</div>
+      <h3>Secretaria Escolar <span class="badge-new">Módulo Completo</span></h3>
+      <p>Espaço exclusivo para o secretário gerenciar matrículas, documentos e atendimento ao público — tudo centralizado:</p>
+      <ul>
+        <li>Matrícula e rematrícula de alunos</li>
+        <li>Emissão de declarações, boletins e históricos</li>
+        <li>Transferências e comunicados de evasão</li>
+        <li>Arquivo administrativo digital</li>
+        <li>Portal do Responsável com código de acesso</li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<!-- PERFIS -->
-<div class="roles-bg">
-  <section>
+<!-- ══════════════════════════════════════
+     SPLIT: Secretaria Escolar
+══════════════════════════════════════ -->
+<div style="background:#eff6ff;border-top:3px solid #2563eb;border-bottom:3px solid #2563eb;">
+  <div class="split-section">
+    <div class="split-text">
+      <span class="section-eyebrow">Módulo Secretaria Escolar</span>
+      <h2>🗂️ Tudo que o Secretário Escolar precisa em um só lugar</h2>
+      <p>Centraliza todos os processos administrativos da escola: desde a matrícula até a emissão de documentos oficiais, com rastro completo de alterações.</p>
+      <ul>
+        <li>Matrícula, transferência e cancelamento de alunos</li>
+        <li>Geração de declarações, boletins e histórico escolar</li>
+        <li>Arquivo administrativo com controle de versões</li>
+        <li>Portal do responsável com código de acesso</li>
+        <li>Ata final e documentos de encerramento do ano letivo</li>
+      </ul>
+    </div>
+    <div class="split-img">
+      <img src=https://media.canva.com/v2/image-resize/format:JPG/height:1066/quality:92/uri:ifs%3A%2F%2FM%2Fe3a0097a-2ea5-4f6c-8182-f5919de94ad3/watermark:F/width:1600?csig=AAAAAAAAAAAAAAAAAAAAAK9c_eymvRO6ne0zficOybW93Mhfm8ThiVjkrNEV6zEd&exp=1776717415&osig=AAAAAAAAAAAAAAAAAAAAAHKW_SAEe7xik3VtE8HY6kO9H930WuUUnTL1-3UnmSt2&signer=media-rpc&x-canva-quality=screen_2x</>
+      <div class="img-caption">Gestão completa de documentos e matrículas escolares</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SPLIT: Diário Digital
+══════════════════════════════════════ -->
+<div style="background:#fff;">
+  <div class="split-section">
+    <div class="split-text">
+      <span class="section-eyebrow">Para Professores</span>
+      <h2>📋 Diário Digital Completo</h2>
+      <p>Professores registram frequência e notas diretamente pelo celular ou computador, com sincronização em tempo real para a coordenação e secretaria.</p>
+      <ul>
+        <li>Frequência por turma e disciplina</li>
+        <li>Lançamento de notas por bimestre</li>
+        <li>Conteúdo ministrado e habilidades BNCC</li>
+        <li>Bloqueio automático fora do prazo</li>
+      </ul>
+    </div>
+    <div class="split-img">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80&auto=format&fit=crop"
+           alt="Professores usando sistema digital" />
+      <div class="img-caption">Interface intuitiva para registro de frequência e notas</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SPLIT: BI & Indicadores
+══════════════════════════════════════ -->
+<div style="background:#f8fafc;">
+  <div class="split-section reverse">
+    <div class="split-text">
+      <span class="section-eyebrow">Para Gestores</span>
+      <h2>📊 Painel de BI e Indicadores</h2>
+      <p>Gestores municipais acompanham em tempo real os indicadores de toda a rede: taxas de aprovação, frequência, evolução por escola e muito mais.</p>
+      <ul>
+        <li>Visão consolidada por município</li>
+        <li>Filtros por escola, turma e disciplina</li>
+        <li>Gráficos e relatórios exportáveis</li>
+        <li>Alertas automáticos de baixo desempenho</li>
+      </ul>
+    </div>
+    <div class="split-img">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80&auto=format&fit=crop"
+           alt="Dashboard de indicadores educacionais" />
+      <div class="img-caption">Painel gerencial com dados em tempo real de toda a rede</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SPLIT: Portal do Responsável
+══════════════════════════════════════ -->
+<div style="background:#fff;">
+  <div class="split-section">
+    <div class="split-text">
+      <span class="section-eyebrow">Para as Famílias</span>
+      <h2>👨‍👩‍👧 Portal do Responsável</h2>
+      <p>Os pais e responsáveis acompanham em tempo real a frequência e o desempenho escolar dos filhos, com acesso seguro por código exclusivo.</p>
+      <ul>
+        <li>Acesso por código sem necessidade de cadastro</li>
+        <li>Visualização de frequência por bimestre</li>
+        <li>Notas e médias por disciplina</li>
+        <li>Portal personalizado com logo da escola</li>
+      </ul>
+    </div>
+    <div class="split-img">
+      <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=700&q=80&auto=format&fit=crop"
+           alt="Pais acompanhando desempenho escolar" />
+      <div class="img-caption">Famílias conectadas com a vida escolar dos filhos</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SPLIT: Censo Escolar
+══════════════════════════════════════ -->
+<div style="background:#f0fdf4;border-top:3px solid #16a34a;border-bottom:3px solid #16a34a;">
+  <div class="split-section reverse">
+    <div class="split-text">
+      <span class="section-eyebrow" style="color:#16a34a;background:#dcfce7;">Censo Escolar</span>
+      <h2>📊 Censo Escolar Ágil e Sem Retrabalho</h2>
+      <p>Com o SIGE, o Censo Escolar deixa de ser um processo trabalhoso. Todos os dados de alunos, turmas, professores e matrículas já estão cadastrados e atualizados durante o ano letivo — basta exportar na hora do Censo.</p>
+      <p>Chega de planilhas, redigitação e inconsistências. Uma única base de dados serve a toda a rede.</p>
+      <ul>
+        <li>Dados prontos para exportação ao EducaCenso / INEP</li>
+        <li>Validação automática de inconsistências antes do envio</li>
+        <li>Controle de matrícula, transferência e evasão em tempo real</li>
+        <li>Relatórios comparativos entre anos letivos</li>
+        <li>Reduz drasticamente o tempo dedicado ao Censo</li>
+      </ul>
+    </div>
+    <div class="split-img">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&q=80&auto=format&fit=crop"
+           alt="Censo Escolar digital eficiente" />
+      <div class="img-caption">Dados organizados durante o ano — Censo resolvido em minutos</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HIGHLIGHT BAR
+══════════════════════════════════════ -->
+<div class="highlight-bar">
+  <blockquote>"Uma plataforma pensada para a realidade das secretarias municipais brasileiras — do registro de frequência à emissão do histórico escolar, tudo em um só lugar."</blockquote>
+  <cite>Sistema desenvolvido especialmente para Secretarias Municipais de Educação</cite>
+</div>
+
+<!-- ══════════════════════════════════════
+     PERFIS
+══════════════════════════════════════ -->
+<div class="roles-bg" id="perfis">
+  <section class="centered">
+    <span class="section-eyebrow">Perfis de Acesso</span>
     <div class="section-title">Acesso para todos os perfis</div>
     <div class="section-sub">Cada usuário vê apenas o que precisa, com segurança e praticidade</div>
     <div class="roles-grid">
-      <div class="role-card">
-        <div class="role-emoji">🏛️</div>
-        <h3>Secretaria Municipal</h3>
-        <p>Visão consolidada de toda a rede, indicadores, comunicados e gestão de escolas.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-emoji">🏫</div>
-        <h3>Direção Escolar</h3>
-        <p>Gestão da escola, alunos, turmas, documentos e acompanhamento pedagógico.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-emoji">📐</div>
-        <h3>Coordenação</h3>
-        <p>Supervisão de turmas, aprovação de solicitações e relatórios pedagógicos.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-emoji">👩‍🏫</div>
-        <h3>Professores</h3>
-        <p>Diário digital com frequência, notas, conteúdo ministrado e habilidades BNCC.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-emoji">👨‍👩‍👧</div>
-        <h3>Responsáveis</h3>
-        <p>Portal exclusivo para acompanhar frequência e notas do aluno com código de acesso.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-emoji">⚙️</div>
-        <h3>Super Admin</h3>
-        <p>Gerenciamento de municípios, secretarias e configurações globais da plataforma.</p>
-      </div>
+      <div class="role-card"><span class="role-emoji">🏛️</span><h3>Secretaria Municipal</h3><p>Visão consolidada de toda a rede, indicadores, comunicados e gestão de escolas.</p></div>
+      <div class="role-card"><span class="role-emoji">🏫</span><h3>Direção Escolar</h3><p>Gestão da escola, alunos, turmas, documentos e acompanhamento pedagógico.</p></div>
+      <div class="role-card"><span class="role-emoji">📐</span><h3>Coordenação</h3><p>Supervisão de turmas, aprovação de solicitações e relatórios pedagógicos.</p></div>
+      <div class="role-card"><span class="role-emoji">👩‍🏫</span><h3>Professores</h3><p>Diário digital com frequência, notas, conteúdo ministrado e habilidades BNCC.</p></div>
+      <div class="role-card"><span class="role-emoji">👨‍👩‍👧</span><h3>Responsáveis</h3><p>Portal exclusivo para acompanhar frequência e notas do aluno com código de acesso.</p></div>
+      <div class="role-card"><span class="role-emoji">⚙️</span><h3>Super Admin</h3><p>Gerenciamento de municípios, secretarias e configurações globais da plataforma.</p></div>
     </div>
   </section>
 </div>
 
-<!-- DIFERENCIAIS -->
-<section>
+<!-- ══════════════════════════════════════
+     DIFERENCIAIS
+══════════════════════════════════════ -->
+<section id="diferenciais" class="centered">
+  <span class="section-eyebrow">Por que o SIGE?</span>
   <div class="section-title">Por que escolher o SIGE?</div>
-  <div class="section-sub">Desenvolvido especialmente para a realidade das secretarias municipais brasileiras</div>
+  <div class="section-sub">Desenvolvido especialmente para a realidade das Secretarias Municipais de Educação brasileiras</div>
   <div class="diff-grid">
-    <div class="diff-card">
-      <div class="diff-icon">☁️</div>
-      <h3>100% na Nuvem</h3>
-      <p>Sem instalação, sem servidor local. Acesse de qualquer dispositivo com internet.</p>
-    </div>
-    <div class="diff-card">
-      <div class="diff-icon">🔒</div>
-      <h3>Dados Seguros</h3>
-      <p>Controle de acesso por perfil, com logs de auditoria e proteção de dados (LGPD).</p>
-    </div>
-    <div class="diff-card">
-      <div class="diff-icon">📱</div>
-      <h3>Mobile Friendly</h3>
-      <p>Interface responsiva que funciona perfeitamente em celulares e tablets.</p>
-    </div>
-    <div class="diff-card">
-      <div class="diff-icon">⚡</div>
-      <h3>Rápido e Simples</h3>
-      <p>Design intuitivo que professores e gestores aprendem em minutos, sem treinamento longo.</p>
-    </div>
-    <div class="diff-card">
-      <div class="diff-icon">🌐</div>
-      <h3>Multi-escola</h3>
-      <p>Gerencie todas as escolas do município em uma única plataforma centralizada.</p>
-    </div>
-    <div class="diff-card">
-      <div class="diff-icon">🏆</div>
-      <h3>Suporte Dedicado</h3>
-      <p>Acompanhamento na implantação e suporte técnico contínuo para sua equipe.</p>
-    </div>
+    <div class="diff-card"><span class="diff-icon">☁️</span><h3>100% na Nuvem</h3><p>Sem instalação, sem servidor local. Acesse de qualquer dispositivo com internet.</p></div>
+    <div class="diff-card"><span class="diff-icon">🔒</span><h3>Dados Seguros</h3><p>Controle de acesso por perfil, com logs de auditoria e proteção de dados (LGPD).</p></div>
+    <div class="diff-card"><span class="diff-icon">📱</span><h3>Mobile Friendly</h3><p>Interface responsiva que funciona perfeitamente em celulares e tablets.</p></div>
+    <div class="diff-card"><span class="diff-icon">⚡</span><h3>Rápido e Simples</h3><p>Design intuitivo que professores e gestores aprendem em minutos, sem treinamento longo.</p></div>
+    <div class="diff-card"><span class="diff-icon">🌐</span><h3>Multi-escola</h3><p>Gerencie todas as escolas do município em uma única plataforma centralizada.</p></div>
+    <div class="diff-card"><span class="diff-icon">🏆</span><h3>Suporte Dedicado</h3><p>Acompanhamento na implantação e suporte técnico contínuo para sua equipe.</p></div>
   </div>
 </section>
 
-<!-- FAQ -->
-<div class="roles-bg">
-  <section>
+<!-- ══════════════════════════════════════
+     FAQ
+══════════════════════════════════════ -->
+<div class="roles-bg" id="faq">
+  <section class="centered">
+    <span class="section-eyebrow">FAQ</span>
     <div class="section-title">Perguntas Frequentes</div>
     <div class="section-sub">Tire suas dúvidas sobre o SIGE</div>
     <div class="faq-list">
-      <div class="faq-item">
-        <h3>O SIGE funciona para qualquer município?</h3>
-        <p>Sim! O sistema é flexível e se adapta a municípios de qualquer porte, desde pequenas cidades com poucas escolas até redes municipais com centenas de unidades.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Como é feita a migração dos dados atuais?</h3>
-        <p>Nossa equipe auxilia na importação dos dados existentes (alunos, turmas, professores) para o sistema, garantindo uma transição tranquila.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Os professores precisam de treinamento especial?</h3>
-        <p>O sistema foi desenvolvido para ser intuitivo. Oferecemos guia de uso integrado e treinamento online para toda a equipe durante a implantação.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Os dados ficam seguros na nuvem?</h3>
-        <p>Absolutamente. Utilizamos criptografia, backups automáticos e controle de acesso rigoroso, em conformidade com a LGPD.</p>
-      </div>
-      <div class="faq-item">
-        <h3>É possível personalizar para a realidade da nossa rede?</h3>
-        <p>Sim. O sistema permite configurações específicas por escola, como avaliação conceitual para os primeiros anos do fundamental, logotipos e muito mais.</p>
-      </div>
+      <div class="faq-item"><h3>O SIGE funciona para qualquer município?</h3><p>Sim! O sistema é flexível e se adapta a municípios de qualquer porte, desde pequenas cidades com poucas escolas até redes municipais com centenas de unidades.</p></div>
+      <div class="faq-item"><h3>Como é feita a migração dos dados atuais?</h3><p>Nossa equipe auxilia na importação dos dados existentes (alunos, turmas, professores) para o sistema, garantindo uma transição tranquila sem perda de informações.</p></div>
+      <div class="faq-item"><h3>Os professores precisam de treinamento especial?</h3><p>O sistema foi desenvolvido para ser intuitivo. Oferecemos guia de uso integrado e treinamento online para toda a equipe durante a implantação.</p></div>
+      <div class="faq-item"><h3>Os dados ficam seguros na nuvem?</h3><p>Absolutamente. Utilizamos criptografia, backups automáticos e controle de acesso rigoroso, em conformidade com a LGPD.</p></div>
+      <div class="faq-item"><h3>É possível personalizar para a realidade da nossa rede?</h3><p>Sim. O sistema permite configurações específicas por escola, como avaliação conceitual para os primeiros anos, logotipos e muito mais.</p></div>
     </div>
   </section>
 </div>
 
-<!-- CTA -->
+<!-- ══════════════════════════════════════
+     CTA
+══════════════════════════════════════ -->
 <div class="cta-section" id="contato">
   <h2>Pronto para modernizar sua rede municipal?</h2>
   <p>Entre em contato e agende uma demonstração gratuita personalizada para o seu município.</p>
   <div class="cta-btns">
-    <a href="https://wa.me/5500000000000?text=Olá!%20Quero%20conhecer%20o%20SIGE%20para%20meu%20município." class="btn-whatsapp">💬 Falar no WhatsApp</a>
+    <a href="https://wa.me/5592988524821?text=Olá!%20Quero%20conhecer%20o%20SIGE%20para%20meu%20município." class="btn-whatsapp">💬 Falar no WhatsApp</a>
     <a href="mailto:contato@sige.edu.br" class="btn-email">✉️ Enviar E-mail</a>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
 <footer>
   <div class="footer-logo">SI<span>GE</span></div>
   <p>Sistema Integrado de Gestão Escolar</p>
-  <p style="margin-top:8px;">Desenvolvido para secretarias municipais de educação do Brasil</p>
+  <p>Desenvolvido para Secretarias Municipais de Educação brasileiras</p>
+  <p style="margin-top:12px;">📞 (92) 98852-4821 &nbsp;|&nbsp; ✉️ contato@sige.edu.br</p>
 </footer>
 
 </body>
